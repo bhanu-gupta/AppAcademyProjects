@@ -1,4 +1,5 @@
-require_relative "skeleton/lib/00_tree_node"
+require_relative "./skeleton/lib/00_tree_node"
+require "byebug"
 
 class KnightPathFinder
     def initialize(start_pos)
@@ -13,11 +14,12 @@ class KnightPathFinder
 
     def build_move_tree
         queue = [self.root_node]
-        unless queue.empty?
+        until queue.empty?
             current_node = queue.shift
             current_pos = current_node.value
             valid_positions = new_move_positions(current_pos)
             valid_positions.each do |child_pos| 
+
                 child_node = PolyTreeNode.new(child_pos)
                 current_node.add_child(child_node)
                 queue << child_node
