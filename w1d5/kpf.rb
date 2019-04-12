@@ -3,6 +3,7 @@ require_relative "skeleton/lib/00_tree_node"
 class KnightPathFinder
     def initialize(start_pos)
         @start_pos = start_pos
+        @considered_positions = [@start_pos]
         self.build_move_tree
     end
 
@@ -11,10 +12,15 @@ class KnightPathFinder
     end
 
     def build_move_tree
-        self.root_node
+        valid_positions = new_move_positions(@start_pos)
+        start_node = self.root_node
+        valid_positions.each {|child_pos| start_node.add_child(PolyTreeNode.new(child_pos)}
     end
 
-    def new_move_positions
+    def new_move_positions(pos)
+        valid_moves_arr = KnightPathFinder.valid_moves(pos) - @considered_positions
+        @considered_positions += valid_moves_arr
+        valid_moves_arr
     end
 
     def self.valid_moves(pos)
