@@ -1,5 +1,4 @@
 require_relative "./skeleton/lib/00_tree_node"
-require "byebug"
 
 class KnightPathFinder
     def initialize(start_pos)
@@ -9,7 +8,7 @@ class KnightPathFinder
     end
 
     def root_node
-        PolyTreeNode.new(@start_pos)
+        @start_node = PolyTreeNode.new(@start_pos)
     end
 
     def build_move_tree
@@ -52,7 +51,7 @@ class KnightPathFinder
     end
 
     def find_path(end_pos)
-        trace_path_back(root_node.bfs(end_pos))
+        trace_path_back(@start_node.bfs(end_pos))
     end
 
     def trace_path_back(node)
