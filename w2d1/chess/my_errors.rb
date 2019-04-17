@@ -1,2 +1,2 @@
-class InvalidPositionError < StandardError
+class InvalidPositionError < StandardError    
 end

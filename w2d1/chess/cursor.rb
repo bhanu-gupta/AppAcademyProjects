@@ -33,12 +33,16 @@ MOVES = {
 class Cursor
 
   attr_reader :cursor_pos, :board
+  attr_writer :cursor_pos
 
   def initialize(cursor_pos, board)
     @cursor_pos = cursor_pos
     @board = board
+    @selected = false
   end
-
+  def toggle_selected
+    @selected = !@selected
+  end
   def get_input
     key = KEYMAP[read_char]
     handle_key(key)
@@ -78,6 +82,7 @@ class Cursor
   def handle_key(key)
     case key
     when :return,:space
+      toggle_selected
         return @cursor_pos
     when :left,:right,:up,:down
         update_pos(MOVES[key])
@@ -91,9 +96,9 @@ class Cursor
     x,y = diff
     temp_new_pos = [cursor_pos[0]+x,cursor_pos[1]+y]
     if board.valid_pos?(temp_new_pos)
-        cursor_pos = temp_new_pos
+        self.cursor_pos = temp_new_pos
     else
-        raise InvalidPositionError("That move is illegal")
+        raise InvalidPositionError.new("That move is illegal")
     end
   end
 end

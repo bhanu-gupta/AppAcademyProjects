@@ -1,13 +1,20 @@
-# require_relative "board"
+require "colorize"
 
 class Piece
-    def initialize(color, board, pos)
-        @color = color
+    def initialize(symbol, board, pos, color)
+        @symbol = symbol
         @board = board
         @pos = pos
+        @color = color
     end
-    def to_s
-        puts "#{color} piece at pos #{pos}"
+    def print_s
+        # "{&:b[pos]}" b[pos].to_s + " "
+        # print @symbol
+        if color == "w"
+            print @symbol.colorize(:white ).colorize( :background => :light_blue)
+        else
+            print @symbol.colorize(:black ).colorize( :background => :light_blue)
+        end
     end
 
     def empty?
@@ -20,9 +27,8 @@ class Piece
         @pos = val
     end
 
-    def symbol
-    end
-    attr_reader :color
+
+    attr_reader :color, :board , :symbol
     protected
     attr_reader :pos
     private
