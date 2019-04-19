@@ -1,0 +1,37 @@
+div {
+}
+
+#first-div {
+  background-color: #39cccc;
+}
+
+#second-div {
+  background-color: #ff4136;
+  box-sizing: border-box;
+}
+
+#third-div {
+  background-color: #d010d6;
+  min-height: 400px;
+}
+
+.image-1-container{
+  width: 200px;
+  height: 600px;
+  background-color: cornflowerblue
+
+}
+
+.image-1-container img{
+  width: 100%;
+}
+
+p {
+  background-color: #7fdbff;
+}
+
+.image-2-container{
+  min-width:200px;
+  background-color: #ff4136;
+  display: inline-block;
+}
