@@ -37,8 +37,9 @@ end
 module Associatable
   # Phase IIIb
   def belongs_to(name, options = {})
-    options = BelongsToOptions.new(name, options)
+    self.class.assoc_options[name] = BelongsToOptions.new(name, options)
     define_method(name) {
+      options = self.class.assoc_options[name]
       foreign_key_val = self.send(options.foreign_key)
       select_result = DBConnection.execute(<<-SQL, foreign_key_val)
         SELECT
@@ -53,8 +54,9 @@ module Associatable
   end
 
   def has_many(name, options = {})
-    options = HasManyOptions.new(name, self.to_s, options)
+    self.class.assoc_options[name] = HasManyOptions.new(name, self.to_s, options)
     define_method(name) {
+      options = self.class.assoc_options[name]
       table_name = (options.model_class.to_s.downcase + 's').underscore
       primary_key_val = self.send(options.primary_key)
       select_result = DBConnection.execute(<<-SQL, primary_key_val)
@@ -71,6 +73,8 @@ module Associatable
 
   def assoc_options
     # Wait to implement this in Phase IVa. Modify `belongs_to`, too.
+    @assoc_options ||= {}
+    @assoc_options
   end
 end
 
