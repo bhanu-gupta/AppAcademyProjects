@@ -1,0 +1,25 @@
+<h1><%= @track.title%></h1>
+<% if @notes %>
+    <h2>Notes</h2>
+    <ul>
+        <%  @notes.each do |note| %>
+            <li><%= note.name %></li>
+        <% end %>
+    </ul>
+<% end %>
+<h2>Links</h2>
+<ul>
+    <li>
+        <a href="<%= edit_track_url(@track) %>">Edit Track</a>
+    </li>
+    <li>
+        <form action="<%= track_url(@track)%>" method="POST">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+            <input type="submit" value="Destroy Track">
+        </form>
+    </li>
+    <li>
+       <a href="<%= album_url(@album) %>">Back to <%= @album.title%></a>
+    </li>
+</ul>
