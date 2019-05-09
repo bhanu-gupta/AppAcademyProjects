@@ -1,0 +1,25 @@
+/* PHASE 4: Footer */
+.footer {
+    display: flex;
+    justify-content: space-between;
+    width:902px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid lightgray;
+    border-top: none;
+    color: gray;
+    font-size: 14px;
+    border-radius: 0 0 5px 5px;
+}
+
+.footer ul{
+    display: flex;
+    justify-content: space-around;
+    width: 270px;
+}
+
+.footer li {
+
+}
