@@ -6,6 +6,8 @@ const Util = require('./utils.js');
 window.Util = Util;
 const Asteroid = require('./asteroid.js');
 window.Asteroid = Asteroid;
+const Game = require('./game.js');
+window.Game = Game;
 
 document.addEventListener('DOMContentLoaded', () => {
     let canvas = document.getElementById('game-canvas');
@@ -16,14 +18,19 @@ document.addEventListener('DOMContentLoaded', () => {
         radius: 20,
         color: 'green'
     });
-    circle.draw(ctx);
-    const asteroid = new Asteroid(Util.randomVec(400));
-    asteroid.draw(ctx);
-    setTimeout(()=>{
-        ctx.clearRect(0, 0, 1000, 500);
-        asteroid.move();
-        circle.move();
-        asteroid.draw(ctx);
-        circle.draw(ctx);
+    // circle.draw(ctx);
+    const game = new Game();
+    game.draw(ctx);
+    setTimeout(() => {
+        game.moveObjects();
+        game.draw(ctx);
     }, 1000);
+
+    // setTimeout(()=>{
+    //     ctx.clearRect(0, 0, 1000, 500);
+    //     asteroid.move();
+    //     circle.move();
+    //     asteroid.draw(ctx);
+    //     circle.draw(ctx);
+    // }, 1000);
 });
