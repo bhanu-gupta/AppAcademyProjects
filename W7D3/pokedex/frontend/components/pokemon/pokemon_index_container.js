@@ -1,10 +1,9 @@
 import {connect} from 'react-redux';
 import {requestAllPokemon} from '../../actions/pokemon_actions';
 import PokemonIndex from './pokemon_index';
-import selectAllPokemon from '../../reducers/selectors';
+import {selectAllPokemon} from '../../reducers/selectors';
 
 const msp = (state) => {
-    debugger
     return {
         pokemon: selectAllPokemon(state)
     };
@@ -13,7 +12,7 @@ const msp = (state) => {
 const mdp = (dispatch) => {
     return {
         requestAllPokemon: () => {
-            debugger
+            // debugger
             return dispatch(requestAllPokemon());
         }
     };
