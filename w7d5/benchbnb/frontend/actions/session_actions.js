@@ -26,25 +26,28 @@ export const receiveErrors = (errors) => {
 
 export const login = (userForm) => {
     return (dispatch) => {
-        return SessionApiUtils.login(userForm).then((user) => {
-             return dispatch(receiveCurrentUser(user));
-        });
+        return SessionApiUtils.login(userForm).then(
+            (user) => dispatch(receiveCurrentUser(user)),
+            (errors) => dispatch(receiveErrors(errors.responseJSON))
+        );
     };
 };
 
 export const signup = (userForm) => {
     return (dispatch) => {
-        return SessionApiUtils.signup(userForm).then((user) => {
-            return dispatch(receiveCurrentUser(user));
-        });
+        return SessionApiUtils.signup(userForm).then(
+            (user) => dispatch(receiveCurrentUser(user)),
+            (errors) => dispatch(receiveErrors(errors.responseJSON))
+        );
     };
 };
 
 export const logout = () => {
     return (dispatch) => {
-        return SessionApiUtils.logout().then(() => {
-            return dispatch(logoutCurrentUser());
-        });
+        return SessionApiUtils.logout().then(
+            () => dispatch(logoutCurrentUser()),
+            (errors) => dispatch(receiveErrors(errors.responseJSON))
+        );
     };
 };
 
